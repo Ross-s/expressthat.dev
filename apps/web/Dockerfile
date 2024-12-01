@@ -12,7 +12,7 @@ WORKDIR /app
 # Replace <your-major-version> with the major version installed in your repository. For example:
 # RUN yarn global add turbo@^2
 RUN pnpm add -g turbo@^2
-COPY ${BUILD_PATH}/. .
+COPY "${BUILD_PATH}/." .
  
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
 # Assuming "web" is the name entered in the project's package.json: { name: "web" }
