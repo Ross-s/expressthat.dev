@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                git branch: 'main', credentialsId: 'Ross Searle Github', url: 'https://github.com/Ross-s/expressthat.dev.git'
                 script {
-                    def dockerImage = docker.build("web:${env.BUILD_ID}", '--build-arg "BUILD_PATH=/home/jenkins/workspace/${JOB_NAME}" apps/web')
+                    def dockerImage = docker.build("web:${env.BUILD_ID}", 'apps/web')
                 }
             }
         }
