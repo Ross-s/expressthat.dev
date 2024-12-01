@@ -1,6 +1,7 @@
 FROM node:18-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+ARG BUILD_PATH
 RUN corepack enable && corepack prepare pnpm --activate
  
 FROM base AS builder
@@ -12,7 +13,7 @@ WORKDIR /app
 # RUN yarn global add turbo@^2
 RUN pnpm add -g turbo@^2
 RUN sleep 300
-COPY . .
+COPY ${BUILD_PATH}/. .
  
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
 # Assuming "web" is the name entered in the project's package.json: { name: "web" }
