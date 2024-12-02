@@ -4,9 +4,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "expressthat_apps_con
     config {
         
         ingress_rule {
-            hostname="test.expressthat.dev"
+            hostname="demo.expressthat.dev"
             service="http://${var.docker_host}:3000"
-            path="/"
+            path="/docs"
         }
 
         ingress_rule {
