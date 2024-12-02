@@ -29,13 +29,21 @@ pipeline {
     stage('Terraform Init') {
       steps {
         script {
+            sh "terraform -chdir=apps/TF init"
+        }
+      }
+    }
+
+    stage('Terraform Apply') {
+      steps {
+        script {
           withCredentials([
             string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY'),
             usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD'),
             string(credentialsId: 'docker-socket', variable: 'DOCKER_SOCKET')
             ]
           ) {
-            sh "terraform init -var='build_id=${env.BUILD_ID}' -var='docker_registry=${DOCKER_REGISTRY}' -var='docker_registry_username'=${DOCKER_REGISTRY_USERNAME} -var='docker_registry_password'=${DOCKER_REGISTRY_PASSWORD} -var='docker_socket=${DOCKER_SOCKET}' apps/TF"
+                sh "terraform -chdir=apps/TF apply -var='build_id=${env.BUILD_ID}' -var='docker_registry=${DOCKER_REGISTRY}' -var='docker_registry_username'=${DOCKER_REGISTRY_USERNAME} -var='docker_registry_password'=${DOCKER_REGISTRY_PASSWORD} -var='docker_socket=${DOCKER_SOCKET}'"
           }
         }
       }
