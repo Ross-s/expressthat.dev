@@ -13,7 +13,7 @@ terraform {
 }
 
 provider "docker" {
-  host = var.docker_socket
+  host = "tcp://${var.docker_host}:2376"
 
   registry_auth {
     address = var.docker_registry

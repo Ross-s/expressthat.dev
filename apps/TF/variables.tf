@@ -10,8 +10,8 @@ variable "cloudflare_account_id" {
   description = "Cloudflare account ID"
 }
 
-variable "docker_socket" {
-  description = "Docker socket"
+variable "docker_host" {
+  description = "Docker host for containers and socket"
 }
 
 variable "docker_registry" {
