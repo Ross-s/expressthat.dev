@@ -51,7 +51,7 @@ pipeline {
                   -var='docker_registry=${DOCKER_REGISTRY}' \
                   -var='docker_registry_username=${DOCKER_REGISTRY_USERNAME}' \
                   -var='docker_registry_password=${DOCKER_REGISTRY_PASSWORD}' \
-                  -var='docker_host=${DOCKER_SOCKET}' \
+                  -var='docker_host=${DOCKER_HOST}' \
                   -var='cloudflare_api_token=${CLOUDFLARE_API_TOKEN}' \
                   -var='cloudflare_email=${CLOUDFLARE_EMAIL}' \
                   -var='cloudflare_account_id=${CLOUDFLARE_ACCOUNT_ID}' \
