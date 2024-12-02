@@ -9,7 +9,7 @@ pipeline {
                 parallel(
                     'docs': {
                         script {
-                            docker.withRegistry('${DOCKER_REGISTRY}', 'nexus-credentials') {
+                            docker.withRegistry("${DOCKER_REGISTRY}", 'nexus-credentials') {
                                 def dockerImage = docker.build("docs:${env.BUILD_ID}", '--progress=plain -f apps/docs/Dockerfile .')
                                 dockerImage.push()
                             }
