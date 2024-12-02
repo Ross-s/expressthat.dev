@@ -24,7 +24,7 @@ export default function Home() {
       <main className={styles.main}>
         <ThemeImage
           className={styles.logo}
-          srcLight="turborepo-dark.svg"
+          srcLight="/docs/turborepo-dark.svg"
           srcDark="turborepo-light.svg"
           alt="Turborepo logo"
           width={180}
@@ -47,7 +47,7 @@ export default function Home() {
           >
             <Image
               className={styles.logo}
-              src="/vercel.svg"
+              src="/docs/vercel.svg"
               alt="Vercel logomark"
               width={20}
               height={20}
@@ -75,7 +75,7 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="/window.svg"
+            src="/docs/window.svg"
             alt="Window icon"
             width={16}
             height={16}
@@ -89,7 +89,7 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="/globe.svg"
+            src="/docs/globe.svg"
             alt="Globe icon"
             width={16}
             height={16}
