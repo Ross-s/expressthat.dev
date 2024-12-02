@@ -1,12 +1,18 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_REGISTRY = credentials('nexus-url')
+    }
     stages {
         stage('Build') {
             steps {
                 parallel(
                     'docs': {
                         script {
-                            def dockerImage = docker.build("docs:${env.BUILD_ID}", '--progress=plain -f apps/docs/Dockerfile .')
+                            docker.withRegistry('$DOCKER_REGISTRY', 'nexus-credentials') {
+                                def dockerImage = docker.build("docs:${env.BUILD_ID}", '--progress=plain -f apps/docs/Dockerfile .')
+                                dockerImage.push()
+                            }
                         }
                     },
                     'web': {
