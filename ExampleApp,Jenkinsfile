@@ -42,7 +42,7 @@ pipeline {
             usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD'),
             string(credentialsId: 'docker-host', variable: 'DOCKER_HOST'),
             usernamePassword(credentialsId: 'cloudflare-credentials', usernameVariable: 'CLOUDFLARE_EMAIL', passwordVariable: 'CLOUDFLARE_API_TOKEN'),
-            string(credentialsId: 'cloudflare-account-id', variable: 'CLOUDFLARE_ACCOUNT_ID')
+            string(credentialsId: 'cloudflare-account-id', variable: 'CLOUDFLARE_ACCOUNT_ID'),
             usernamePassword(credentialsId: 'cloudflare-tunnel', usernameVariable: 'CLOUDFLARE_TUNNEL_ID', passwordVariable: 'CLOUDFLARE_TUNNEL_SECRET')
             ]
           ) {
