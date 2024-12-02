@@ -1,4 +1,7 @@
 terraform {
+  backend "local" {
+    path = "/home/jenkins/tf-backend/apps/Express That Apps/terraform.tfstate"
+  }
   required_providers {
     docker = {
       source = "kreuzwerker/docker"
