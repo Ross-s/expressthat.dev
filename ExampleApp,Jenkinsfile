@@ -1,29 +1,44 @@
 pipeline {
-    agent any
-    environment {
-        DOCKER_REGISTRY = credentials('nexus-url')
-    }
-    stages {
-        stage('Build') {
-            steps {
-                parallel(
-                    'docs': {
-                        script {
-                            withCredentials([string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY')]) {
-                                docker.withRegistry("${DOCKER_REGISTRY}", 'nexus-credentials') {
-                                    def dockerImage = docker.build("docs:${env.BUILD_ID}", '--progress=plain -f apps/docs/Dockerfile .')
-                                    dockerImage.push()
-                                }
-                            }
-                        }
-                    },
-                    'web': {
-                        script {
-                            def dockerImage = docker.build("web:${env.BUILD_ID}", '--progress=plain -f apps/web/Dockerfile .')
-                        }
-                    }
-                )
+  agent any
+  environment {
+    DOCKER_REGISTRY = credentials('nexus-url')
+  }
+  stages {
+    stage('Build') {
+      steps {
+        parallel(
+          'docs': {
+            script {
+              withCredentials([string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY')]) {
+                docker.withRegistry("${DOCKER_REGISTRY}", 'nexus-credentials') {
+                  def dockerImage = docker.build("docs:${env.BUILD_ID}", '--progress=plain -f apps/docs/Dockerfile .')
+                  dockerImage.push()
+                }
+              }
             }
-        }
+          },
+          'web': {
+            script {
+              def dockerImage = docker.build("web:${env.BUILD_ID}", '--progress=plain -f apps/web/Dockerfile .')
+            }
+          }
+        )
+      }
     }
+
+    stage('Terraform Init') {
+      steps {
+        script {
+          withCredentials([
+            string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY'),
+            usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD'),
+            string(credentialsId: 'docker-socket', variable: 'DOCKER_SOCKET')
+            ]
+          ) {
+            sh "terraform init -chdir=apps/TF -var='build_id=${env.BUILD_ID}' -var='docker_registry=${DOCKER_REGISTRY}' -var='docker_registry_username'=${DOCKER_REGISTRY_USERNAME} -var='docker_registry_password'=${DOCKER_REGISTRY_PASSWORD} -var='docker_socket=${DOCKER_SOCKET}'"
+          }
+        }
+      }
+    }
+  }
 }
