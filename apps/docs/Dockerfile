@@ -31,6 +31,7 @@ RUN pnpm install
 # Build the project
 COPY --from=builder /app/out/full/ .
 ENV BUILD_MODE="standalone"
+ENV BASE_PATH="/docs"
 RUN pnpm turbo run build
  
 FROM base AS runner
