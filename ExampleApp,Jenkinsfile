@@ -43,7 +43,7 @@ pipeline {
             string(credentialsId: 'docker-socket', variable: 'DOCKER_SOCKET')
             ]
           ) {
-                sh "terraform -chdir=apps/TF apply -var='build_id=${env.BUILD_ID}' -var='docker_registry=${DOCKER_REGISTRY}' -var='docker_registry_username'=${DOCKER_REGISTRY_USERNAME} -var='docker_registry_password'=${DOCKER_REGISTRY_PASSWORD} -var='docker_socket=${DOCKER_SOCKET}'"
+                sh "terraform -chdir=apps/TF apply -var='build_id=${env.BUILD_ID}' -var='docker_registry=${DOCKER_REGISTRY}' -var='docker_registry_username'=${DOCKER_REGISTRY_USERNAME} -var='docker_registry_password'=${DOCKER_REGISTRY_PASSWORD} -var='docker_socket=${DOCKER_SOCKET}' -auto-approve"
           }
         }
       }
