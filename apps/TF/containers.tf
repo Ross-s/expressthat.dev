@@ -7,3 +7,10 @@ resource "docker_container" "docs" {
     }
     restart = "always"
 }
+
+resource "docker_container" "cloudflared" {
+    image = docker_image.cloudflared.image_id
+    name = "cloudflared"
+    restart = "always"
+    command = ["tunnel", "--no-autoupdate", "run", "--token", var.cloudflare_tunnel_secret]
+}

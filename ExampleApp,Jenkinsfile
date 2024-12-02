@@ -43,6 +43,7 @@ pipeline {
             string(credentialsId: 'docker-host', variable: 'DOCKER_HOST'),
             usernamePassword(credentialsId: 'cloudflare-credentials', usernameVariable: 'CLOUDFLARE_EMAIL', passwordVariable: 'CLOUDFLARE_API_TOKEN'),
             string(credentialsId: 'cloudflare-account-id', variable: 'CLOUDFLARE_ACCOUNT_ID')
+            usernamePassword(credentialsId: 'cloudflare-tunnel', usernameVariable: 'CLOUDFLARE_TUNNEL_ID', passwordVariable: 'CLOUDFLARE_TUNNEL_SECRET')
             ]
           ) {
                 sh """
@@ -53,8 +54,9 @@ pipeline {
                   -var='docker_registry_password=${DOCKER_REGISTRY_PASSWORD}' \
                   -var='docker_host=${DOCKER_HOST}' \
                   -var='cloudflare_api_token=${CLOUDFLARE_API_TOKEN}' \
-                  -var='cloudflare_email=${CLOUDFLARE_EMAIL}' \
                   -var='cloudflare_account_id=${CLOUDFLARE_ACCOUNT_ID}' \
+                  -var='cloudflare_tunnel_id=${CLOUDFLARE_TUNNEL_ID}' \
+                  -var='cloudflare_tunnel_secret=${CLOUDFLARE_TUNNEL_SECRET}' \
                   -auto-approve
                 """
           }
