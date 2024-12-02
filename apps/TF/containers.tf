@@ -5,4 +5,5 @@ resource "docker_container" "docs" {
         internal = 3000
         external = 3000
     }
+    restart = "always"
 }

@@ -1,3 +1,15 @@
+variable "cloudflare_api_token" {
+  description = "Cloudflare"
+}
+
+variable "cloudflare_email" {
+  description = "Cloudflare email"
+}
+
+variable "cloudflare_account_id" {
+  description = "Cloudflare account ID"
+}
+
 variable "docker_socket" {
   description = "Docker socket"
 }

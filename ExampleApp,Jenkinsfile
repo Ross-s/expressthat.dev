@@ -40,10 +40,23 @@ pipeline {
           withCredentials([
             string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY'),
             usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD'),
-            string(credentialsId: 'docker-socket', variable: 'DOCKER_SOCKET')
+            string(credentialsId: 'docker-socket', variable: 'DOCKER_SOCKET'),
+            usernamePassword(credentialsId: 'cloudflare-credentials', usernameVariable: 'CLOUDFLARE_EMAIL' passwordVariable: 'CLOUDFLARE_API_TOKEN'),
+            string(credentialsId: 'cloudflare-account-id', variable: 'CLOUDFLARE_ACCOUNT_ID')
             ]
           ) {
-                sh "terraform -chdir=apps/TF apply -var='build_id=${env.BUILD_ID}' -var='docker_registry=${DOCKER_REGISTRY}' -var='docker_registry_username'=${DOCKER_REGISTRY_USERNAME} -var='docker_registry_password'=${DOCKER_REGISTRY_PASSWORD} -var='docker_socket=${DOCKER_SOCKET}' -auto-approve"
+                sh """
+                  terraform -chdir=apps/TF apply \
+                  -var='build_id=${env.BUILD_ID}' \
+                  -var='docker_registry=${DOCKER_REGISTRY}' \
+                  -var='docker_registry_username=${DOCKER_REGISTRY_USERNAME}' \
+                  -var='docker_registry_password=${DOCKER_REGISTRY_PASSWORD}' \
+                  -var='docker_socket=${DOCKER_SOCKET}' \
+                  -var='cloudflare_api_token=${CLOUDFLARE_API_TOKEN}' \
+                  -var='cloudflare_email=${CLOUDFLARE_EMAIL}' \
+                  -var='cloudflare_account_id=${CLOUDFLARE_ACCOUNT_ID}' \
+                  -auto-approve
+                """
           }
         }
       }
