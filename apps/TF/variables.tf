@@ -25,3 +25,13 @@ variable "proxy_username" {
 variable "proxy_password" {
   description = "Proxy password"
 }
+
+variable "domain_name" {
+  description = "Domain name"
+  default = "expressthat.dev"
+}
+
+variable "internal_host" {
+  description = "Internal host"
+  default = "172.17.0.1"
+}
