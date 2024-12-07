@@ -17,3 +17,11 @@ variable "docker_registry_password" {
 variable "build_id" {
   description = "Build ID"
 }
+
+variable "proxy_username" {
+  description = "Proxy username"
+}
+
+variable "proxy_password" {
+  description = "Proxy password"
+}

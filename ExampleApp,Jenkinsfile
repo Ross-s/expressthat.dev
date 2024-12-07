@@ -40,7 +40,8 @@ pipeline {
           withCredentials([
             string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY'),
             usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD'),
-            string(credentialsId: 'docker-host', variable: 'DOCKER_HOST')
+            string(credentialsId: 'docker-host', variable: 'DOCKER_HOST'),
+            usernamePassword(credentialsId: 'proxy-credentials', usernameVariable: 'PROXY_USERNAME', passwordVariable: 'PROXY_PASSWORD')
             ]
           ) {
                 sh """
@@ -50,6 +51,8 @@ pipeline {
                   -var='docker_registry_username=${DOCKER_REGISTRY_USERNAME}' \
                   -var='docker_registry_password=${DOCKER_REGISTRY_PASSWORD}' \
                   -var='docker_host=${DOCKER_HOST}' \
+                  -var='proxy_username=${PROXY_USERNAME}' \
+                  -var='proxy_password=${PROXY_PASSWORD}' \
                   -auto-approve
                 """
           }
