@@ -40,10 +40,7 @@ pipeline {
           withCredentials([
             string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY'),
             usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD'),
-            string(credentialsId: 'docker-host', variable: 'DOCKER_HOST'),
-            usernamePassword(credentialsId: 'cloudflare-credentials', usernameVariable: 'CLOUDFLARE_EMAIL', passwordVariable: 'CLOUDFLARE_API_TOKEN'),
-            string(credentialsId: 'cloudflare-account-id', variable: 'CLOUDFLARE_ACCOUNT_ID'),
-            usernamePassword(credentialsId: 'cloudflare-tunnel', usernameVariable: 'CLOUDFLARE_TUNNEL_ID', passwordVariable: 'CLOUDFLARE_TUNNEL_SECRET')
+            string(credentialsId: 'docker-host', variable: 'DOCKER_HOST')
             ]
           ) {
                 sh """
@@ -53,10 +50,6 @@ pipeline {
                   -var='docker_registry_username=${DOCKER_REGISTRY_USERNAME}' \
                   -var='docker_registry_password=${DOCKER_REGISTRY_PASSWORD}' \
                   -var='docker_host=${DOCKER_HOST}' \
-                  -var='cloudflare_api_token=${CLOUDFLARE_API_TOKEN}' \
-                  -var='cloudflare_account_id=${CLOUDFLARE_ACCOUNT_ID}' \
-                  -var='cloudflare_tunnel_id=${CLOUDFLARE_TUNNEL_ID}' \
-                  -var='cloudflare_tunnel_secret=${CLOUDFLARE_TUNNEL_SECRET}' \
                   -auto-approve
                 """
           }

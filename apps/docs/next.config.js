@@ -4,7 +4,6 @@ const nextConfig = {
     experimental: {
         reactCompiler: true,
     },
-    basePath: process.env.BASE_PATH ?? undefined,
 };
 
 export default nextConfig;
