@@ -27,11 +27,11 @@ pipeline {
               }
             }
           },
-          'vue': {
+          'svelte': {
             script {
               withCredentials([string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY')]) {
                 docker.withRegistry("${DOCKER_REGISTRY}", 'nexus-credentials') {
-                  def dockerImage = docker.build("example-vue:${env.BUILD_ID}", '--progress=plain -f apps/vue/Dockerfile .')
+                  def dockerImage = docker.build("example-svelte:${env.BUILD_ID}", '--progress=plain -f apps/svelte/Dockerfile .')
                   dockerImage.push()
                 }
               }
