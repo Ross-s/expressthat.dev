@@ -7,3 +7,13 @@ resource "nginxproxymanager_proxy_host" "docs" {
   allow_websocket_upgrade = true
   block_exploits          = true
 }
+
+resource "nginxproxymanager_proxy_host" "example_vue" {
+  domain_names            = ["example-vue.${var.domain_name}"]
+  forward_scheme          = "http"
+  forward_host            = var.internal_host
+  forward_port            = 3001
+  caching_enabled         = true
+  allow_websocket_upgrade = true
+  block_exploits          = true
+}

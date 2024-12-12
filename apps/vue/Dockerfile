@@ -12,11 +12,10 @@ WORKDIR /app
 # RUN yarn global add turbo@^2
 RUN pnpm i -g turbo@^2
 COPY . .
-RUN ls
  
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
-# Assuming "web" is the name entered in the project's package.json: { name: "web" }
-RUN turbo prune web --docker
+# Assuming "vue" is the name entered in the project's package.json: { name: "vue" }
+RUN turbo prune vue --docker
  
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -30,7 +29,6 @@ RUN pnpm install
  
 # Build the project
 COPY --from=builder /app/out/full/ .
-ENV BUILD_MODE="standalone"
 RUN pnpm turbo run build
  
 FROM base AS runner
@@ -38,15 +36,20 @@ WORKDIR /app
  
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-USER nextjs
+RUN adduser --system --uid 1001 vue
+USER vue
  
 # Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
+# https://nextjs.org/vue/advanced-features/output-file-tracing
+COPY --from=installer --chown=vue:nodejs /app/apps/vue/ ./
  
 EXPOSE 3000
 
-CMD node apps/web/server.js
+# Set NuxtJS system variables so the application can be reached on your network
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+
+
+# The NuxtJS start-up command when the container is launched to serve the built application
+#CMD ["sleep", "infinity"]
+CMD [ "node", ".output/server/index.mjs" ]

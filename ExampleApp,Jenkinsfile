@@ -17,9 +17,14 @@ pipeline {
               }
             }
           },
-          'web': {
+          'vue': {
             script {
-              def dockerImage = docker.build("web:${env.BUILD_ID}", '--progress=plain -f apps/web/Dockerfile .')
+              withCredentials([string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY')]) {
+                docker.withRegistry("${DOCKER_REGISTRY}", 'nexus-credentials') {
+                  def dockerImage = docker.build("example-vue:${env.BUILD_ID}", '--progress=plain -f apps/vue/Dockerfile .')
+                  dockerImage.push()
+                }
+              }
             }
           }
         )

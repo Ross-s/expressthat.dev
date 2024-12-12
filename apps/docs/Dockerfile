@@ -12,7 +12,6 @@ WORKDIR /app
 # RUN yarn global add turbo@^2
 RUN pnpm i -g turbo@^2
 COPY . .
-RUN ls
  
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
 # Assuming "docs" is the name entered in the project's package.json: { name: "docs" }

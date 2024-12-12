@@ -7,3 +7,13 @@ resource "docker_container" "docs" {
     }
     restart = "always"
 }
+
+resource "docker_container" "example_vue" {
+    image = docker_image.example_vue.image_id
+    name = "example-vue"
+    ports {
+        internal = 3000
+        external = 3001
+    }
+    restart = "always"
+}
