@@ -5,3 +5,7 @@ resource "docker_image" "docs" {
 resource "docker_image" "example_vue" {
   name = "${replace(var.docker_registry, "http://", "")}/example-vue:${var.build_id}"
 }
+
+resource "docker_image" "example_svelte" {
+  name = "${replace(var.docker_registry, "http://", "")}/example-svelte:${var.build_id}"
+}

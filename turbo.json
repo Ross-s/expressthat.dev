@@ -6,7 +6,7 @@
       "env": ["BUILD_MODE", "BASE_PATH"],
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", ".nuxt/**", ".output/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**", ".nuxt/**", ".output/**", "dist/**", ".svelte-kit/**", "build/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
