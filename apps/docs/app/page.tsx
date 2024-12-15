@@ -1,6 +1,7 @@
 import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
+import { Button } from "@expressthat/ui/button";
 import styles from "./page.module.css";
+import {Test} from "@expressthat/core/react";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <Test />
         <ThemeImage
           className={styles.logo}
           srcLight="turborepo-dark.svg"

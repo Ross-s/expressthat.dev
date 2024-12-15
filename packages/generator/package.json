@@ -1,0 +1,67 @@
+{
+  "name": "@expressthat/core",
+  "scripts": {
+    "dev": "watch \"npm run build\" ./src",
+    "build": "mitosis build --c mitosis.config.cjs&& tsup&& svelte-package -i ./packages/svelte/src -o ./dist/svelte&& vite build",
+    "lint": "eslint"
+  },
+  "type": "module",
+  "version": "0.0.1",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "main": "./dist/react.js",
+      "module": "./dist/react.cjs"
+    },
+    "./svelte": {
+      "types": "./dist/svelte/index.d.ts",
+      "svelte": "./dist/svelte/index.js"
+    },
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "main": "./dist/vue/core.js",
+      "module": "./dist/vue/core.cjs"
+    }
+  },
+  "tsup": {
+    "entry": {
+      "react": "packages/react/src/index.ts"
+    },
+    "splitting": false,
+    "sourceMap": true,
+    "clean": true,
+    "minify": true,
+    "dts": true,
+    "format": [
+      "esm",
+      "cjs"
+    ]
+  },
+  "dependencies": {
+    "@builder.io/eslint-plugin-mitosis": "^0.0.15",
+    "@builder.io/mitosis": "latest",
+    "@builder.io/mitosis-cli": "latest",
+    "eslint": "^8.51.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "svelte": "^5.13.0"
+  },
+  "devDependencies": {
+    "@expressthat/eslint-config": "workspace:*",
+    "@expressthat/typescript-config": "workspace:*",
+    "@sveltejs/package": "^2.3.7",
+    "@types/react": "^19.0.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "tsup": "^8.3.5",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.3.0",
+    "watch": "^1.0.2",
+     "vue": "^3.5.13"
+  }
+}

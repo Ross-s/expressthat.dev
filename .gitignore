@@ -36,3 +36,7 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+packages/generator/.svelte-kit/
+
+packages/generator/packages/
