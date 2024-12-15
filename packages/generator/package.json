@@ -31,6 +31,9 @@
     "entry": {
       "react": "packages/react/src/index.ts"
     },
+    "banner": {
+      "js": "\"use client\""
+    },
     "splitting": false,
     "sourceMap": true,
     "clean": true,
