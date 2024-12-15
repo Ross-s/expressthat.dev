@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Test } from "@expressthat/core/vue"
+import { Test } from "@expressthat/core/vue"
 </script>
 
 <template>
