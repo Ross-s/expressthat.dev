@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "nuxt": "^3.14.1592",
-    "vue": "latest",
+    "vue": "^3.5.13",
     "vue-router": "latest",
     "@expressthat/core": "workspace:*"
   }
