@@ -1,8 +1,8 @@
 {
   "name": "@expressthat/core",
   "scripts": {
-    "dev": "watch \"npm run build\" ./src",
-    "build": "mitosis build --c mitosis.config.cjs&& tsup&& svelte-package -i ./packages/svelte/src -o ./dist/svelte&& vite build",
+    "dev": "watch \"npm run build\" ./src ./overrides",
+    "build": "mitosis build --c mitosis.config.cjs&& tsup&& svelte-package -i ./packages/svelte/src -o ./dist/svelte&& vite build --config vite.config.vue.ts",
     "lint": "eslint"
   },
   "version": "0.0.1",
@@ -21,28 +21,15 @@
       "svelte": "./dist/svelte/index.js",
       "module": "./dist/svelte/index.mjs"
     },
+    "./vue.css": {
+        "import": "./dist/vue/core.css",
+        "require": "./dist/vue/core.css"
+      },
     "./vue": {
       "types": "./dist/vue/index.d.ts",
       "main": "./dist/vue/core.js",
       "module": "./dist/vue/core.mjs"
     }
-  },
-  "tsup": {
-    "entry": {
-      "react": "packages/react/src/index.ts"
-    },
-    "banner": {
-      "js": "\"use client\""
-    },
-    "splitting": false,
-    "sourceMap": true,
-    "clean": true,
-    "minify": true,
-    "dts": true,
-    "format": [
-      "esm",
-      "cjs"
-    ]
   },
   "dependencies": {
     "@builder.io/eslint-plugin-mitosis": "^0.0.15",

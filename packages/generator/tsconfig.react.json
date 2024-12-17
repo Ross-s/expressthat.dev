@@ -2,7 +2,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "strict": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
+    "jsxImportSource": "@builder.io/mitosis",
     "noImplicitAny": false,
     "moduleResolution": "node",
     "module": "ESNext"

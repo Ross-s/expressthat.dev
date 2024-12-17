@@ -18,7 +18,7 @@ export default defineConfig({
       entry: resolve(__dirname, "packages/vue/src/index.ts"),
       formats: ["cjs", "es"],
     },
-    minify: false,
+    minify: "terser",
     rollupOptions: {
       external: ["vue"],
       output: {

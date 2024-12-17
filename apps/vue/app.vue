@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { Test } from "@expressthat/core/vue"
+import { PopupProvider } from "@expressthat/core/vue";
+import "@expressthat/core/vue.css";
 </script>
 
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-    <Test />
-  </div>
+  <PopupProvider>
+    <div>
+      <NuxtRouteAnnouncer />
+      <Home />
+    </div>
+  </PopupProvider>
 </template>
