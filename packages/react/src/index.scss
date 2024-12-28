@@ -1,0 +1,204 @@
+.expressthat-popup {
+  &.container {
+    position: fixed;
+    z-index: 1060;
+    inset: 0;
+    box-sizing: border-box;
+    grid-template-areas:
+      "top-start top top-end"
+      "center-start center center-end"
+      "bottom-start bottom-center bottom-end";
+    grid-template-rows: minmax(min-content, auto) minmax(min-content, auto) minmax(
+        min-content,
+        auto
+      );
+    height: 100%;
+    padding: 0.625em;
+    overflow-x: hidden;
+    transition: background-color 0.1s;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .content {
+    will-change: auto;
+    display: grid;
+    position: relative;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0, 100%);
+    width: 32em;
+    max-width: 90vw;
+    padding: 0 0 1.25em;
+    border: none;
+    border-radius: 5px;
+    background: #fff;
+    color: hsl(0, 0%, 33%);
+    font-family: inherit;
+    font-size: 1rem;
+    grid-column: 2;
+    grid-row: 2;
+    place-self: center center;
+    transform: scale(0);
+    opacity: 0;
+
+    &.show {
+      animation: expressthat-popup-show 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)
+        forwards;
+    }
+
+    &.hide {
+      animation: expressthat-popup-hide 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)
+        forwards;
+    }
+
+    h2,
+    p {
+      margin: 0;
+      color: inherit;
+      cursor: initial;
+      word-wrap: break-word;
+      text-align: center;
+    }
+
+    h2 {
+      position: relative;
+      max-width: 100%;
+      padding: 0.8em 1em 0;
+      font-size: 1.875em;
+      font-weight: 600;
+      text-transform: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 0.2em;
+      right: 0.3em;
+      background: transparent;
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: grey;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    p {
+      justify-content: center;
+      margin: 0;
+      padding: 1em 1.6em 0.3em;
+      overflow: auto;
+      font-size: 1.125em;
+      font-weight: normal;
+      line-height: normal;
+      word-break: break-word;
+    }
+
+    .btn-container {
+      margin: 0 auto;
+      margin-top: 20px;
+      button {
+        border: 0;
+        border-radius: 0.25em;
+        background: initial;
+        background-color: #7066e0;
+        color: #fff;
+        font-size: 1em;
+        margin: 0.3125em;
+        padding: 0.625em 1.1em;
+        transition: box-shadow 0.1s;
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0);
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+
+    .icon {
+      width: 100px;
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+
+      .path {
+        will-change: stroke-dashoffset;
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 0;
+        &.circle {
+          -webkit-animation: expressthat-dash 0.9s ease-in-out;
+          animation: expressthat-dash 0.9s ease-in-out;
+        }
+        &.line {
+          stroke-dashoffset: 1000;
+          -webkit-animation: expressthat-dash 0.9s 0.35s ease-in-out forwards;
+          animation: expressthat-dash 0.9s 0.35s ease-in-out forwards;
+        }
+        &.check {
+          stroke-dashoffset: -100;
+          -webkit-animation: expressthat-dash-check 0.9s 0.35s ease-in-out
+            forwards;
+          animation: expressthat-dash-check 0.9s 0.35s ease-in-out forwards;
+        }
+      }
+    }
+  }
+}
+
+@keyframes expressthat-popup-show {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes expressthat-popup-hide {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes expressthat-dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes expressthat-dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes expressthat-dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
+@keyframes expressthat-dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}

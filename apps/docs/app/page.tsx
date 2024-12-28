@@ -2,6 +2,7 @@
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@expressthat/ui/button";
 import styles from "./page.module.css";
+import { usePopup } from "@expressthat/react";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -20,8 +21,23 @@ const ThemeImage = (props: Props) => {
 };
 
 export default function Home() {
+  const popup = usePopup();
+
   return (
     <div className={styles.page}>
+      <button
+        onClick={async () => {
+          console.log(
+            `result: ${await popup?.Confirm("Are you sure?", "You clicked the button!", "Yes", "No")}`,
+          );
+          await popup?.Success("Good job!", "You clicked the button!", "woooo");
+          await popup?.Error("Bad job!", "You clicked the button!", "woooo");
+          await popup?.Warning("Warning!", "You clicked the button!", "woooo");
+          console.log("popup closed!");
+        }}
+      >
+        Open alert
+      </button>
       <main className={styles.main}>
         <ThemeImage
           className={styles.logo}
