@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { CustomPopup } from "../CustomPopup";
-import { ErrorIcon } from "./icons/ErrorIcon";
-import { WarningIcon } from "./icons/WarningIcon";
-import { SuccessIcon } from "./icons/SuccessIcon";
+import { lazy, useState } from "react";
 
-export function SimplePopup(props: {
+const ErrorIcon =  lazy(() => import("./icons/ErrorIcon"));
+const WarningIcon =  lazy(() => import("./icons/WarningIcon"));
+const SuccessIcon =  lazy(() => import("./icons/SuccessIcon"));
+const CustomPopup =  lazy(() => import("../CustomPopup"));
+
+export default function SimplePopup(props: {
   title?: string;
   message?: string;
   confirmText?: string;

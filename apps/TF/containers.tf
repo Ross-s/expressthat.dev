@@ -17,13 +17,3 @@ resource "docker_container" "example_vue" {
     }
     restart = "always"
 }
-
-resource "docker_container" "example_svelte" {
-    image = docker_image.example_svelte.image_id
-    name = "example-svelte"
-    ports {
-        internal = 3000
-        external = 3002
-    }
-    restart = "always"
-}

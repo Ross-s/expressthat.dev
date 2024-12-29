@@ -2,8 +2,13 @@
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@expressthat/ui/button";
 import styles from "./page.module.css";
-import { CustomPopup, usePopup } from "@expressthat/react";
-import { useState } from "react";
+import {
+  ConfirmPopup,
+  ErrorPopup,
+  SuccessPopup,
+  WarningPopup,
+} from "@expressthat/react";
+import { useEffect } from "react";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -22,34 +27,23 @@ const ThemeImage = (props: Props) => {
 };
 
 export default function Home() {
-  const popup = usePopup();
 
-  const [showCustomPopup, setShowCustomPopup] = useState(false);
 
   return (
     <div className={styles.page}>
       <button
         onClick={async () => {
           console.log(
-            `result: ${await popup?.Confirm("Are you sure?", "You clicked the button!", "Yes", "No")}`,
+            `result: ${await ConfirmPopup("Are you sure?", "You clicked the button!", "Yes", "No")}`
           );
-          await popup?.Success("Good job!", "You clicked the button!", "woooo");
-          await popup?.Error("Bad job!", "You clicked the button!", "woooo");
-          await popup?.Warning("Warning!", "You clicked the button!", "woooo");
+          await SuccessPopup("Good job!", "You clicked the button!", "woooo");
+          await ErrorPopup("Bad job!", "You clicked the button!", "woooo");
+          await WarningPopup("Warning!", "You clicked the button!", "woooo");
           console.log("popup closed!");
         }}
       >
         Open alert
       </button>
-      <button onClick={() => setShowCustomPopup(true)}>
-        Open custom popup
-      </button>
-      <CustomPopup
-        show={showCustomPopup}
-        onClose={() => setShowCustomPopup(false)}
-      >
-        <h2>Hello</h2>
-      </CustomPopup>
       <main className={styles.main}>
         <ThemeImage
           className={styles.logo}

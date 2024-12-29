@@ -24,6 +24,9 @@ export default defineConfig({
       verify: false,
     }),
   ],
+  define: {
+    "process.env.NODE_ENV": "production",
+  },
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -33,13 +36,7 @@ export default defineConfig({
     },
     minify: "terser",
     rollupOptions: {
-      external: ["react", "react/jsx-runtime", "react/compiler-runtime"],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
-      },
+      
     },
   },
 });

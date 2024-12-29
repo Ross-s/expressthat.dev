@@ -1,4 +1,3 @@
 import "./index.scss";
-export { PopupProvider } from "./PopupProvider";
-export { usePopup } from "./api/usePopup";
-export { CustomPopup } from "./popups/CustomPopup";
+export { ConfirmPopup, ErrorPopup, SuccessPopup, WarningPopup } from "./api/usePopup";
+export { default as CustomPopup} from "./popups/CustomPopup"; 

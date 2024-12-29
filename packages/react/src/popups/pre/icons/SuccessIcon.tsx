@@ -1,4 +1,4 @@
-export function SuccessIcon() {
+export default function SuccessIcon() {
   return (
     <svg
       version="1.1"

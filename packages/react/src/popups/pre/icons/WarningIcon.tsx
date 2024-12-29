@@ -1,4 +1,4 @@
-export function WarningIcon() {
+export default function WarningIcon() {
   return (
     <svg
       className="icon"

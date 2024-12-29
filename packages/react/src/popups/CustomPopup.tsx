@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 
-export function CustomPopup(props: {
+export default function CustomPopup(props: {
   children: React.ReactNode;
   show?: boolean;
   backdrop?: boolean;
