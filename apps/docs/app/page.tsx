@@ -2,7 +2,8 @@
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@expressthat/ui/button";
 import styles from "./page.module.css";
-import { usePopup } from "@expressthat/react";
+import { CustomPopup, usePopup } from "@expressthat/react";
+import { useState } from "react";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -23,6 +24,8 @@ const ThemeImage = (props: Props) => {
 export default function Home() {
   const popup = usePopup();
 
+  const [showCustomPopup, setShowCustomPopup] = useState(false);
+
   return (
     <div className={styles.page}>
       <button
@@ -38,6 +41,15 @@ export default function Home() {
       >
         Open alert
       </button>
+      <button onClick={() => setShowCustomPopup(true)}>
+        Open custom popup
+      </button>
+      <CustomPopup
+        show={showCustomPopup}
+        onClose={() => setShowCustomPopup(false)}
+      >
+        <h2>Hello</h2>
+      </CustomPopup>
       <main className={styles.main}>
         <ThemeImage
           className={styles.logo}

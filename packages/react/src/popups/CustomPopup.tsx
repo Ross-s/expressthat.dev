@@ -58,7 +58,7 @@ export function CustomPopup(props: {
         aria-hidden={!shouldShow}
         style={{
           backgroundColor:
-            (props.backdrop !== false) ? "rgba(0,0,0,0.4)" : "transparent",
+            props.backdrop !== false ? "rgba(0,0,0,0.4)" : "transparent",
           display: shouldShow ? "grid" : "none",
         }}
         onClick={(event) => {
@@ -72,7 +72,7 @@ export function CustomPopup(props: {
           className="expressthat-popup content"
           role="document"
         >
-          {(props.closeButton !== false) && (
+          {props.closeButton !== false && (
             <button onClick={closePopup} className="close" aria-label="Close">
               &times;
             </button>

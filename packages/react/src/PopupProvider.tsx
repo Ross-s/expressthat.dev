@@ -36,7 +36,7 @@ export function PopupProvider(props: { children: React.ReactNode }) {
     type: "success" | "error" | "question" | "warning",
     title: string,
     message: string,
-    confirmText?: string
+    confirmText?: string,
   ) {
     setPopupToShow(type);
     setShouldShow(true);
@@ -59,7 +59,7 @@ export function PopupProvider(props: { children: React.ReactNode }) {
           title: string,
           message: string,
           confirmText?: string,
-          declineText?: string
+          declineText?: string,
         ) => {
           setPopupToShow("question");
           setShouldShow(true);
@@ -74,7 +74,7 @@ export function PopupProvider(props: { children: React.ReactNode }) {
         <>
           {["warning", "error", "success"].includes(popupToShow ?? "") && (
             <SimplePopup
-            key={popupToShow}
+              key={popupToShow}
               type={popupToShow as any}
               confirmText={text?.confirmText}
               message={text?.message}

@@ -19,26 +19,28 @@ export function QuestionPopup(props: {
         props.onClose?.(result);
       }}
     >
-      <QuestionMarkIcon />
-      <h2>{props.title}</h2>
-      <p>{props.message}</p>
-      <div className="btn-container">
-        <button
-          onClick={() => {
-            setResult(false);
-            setShow(false);
-          }}
-        >
-          {props.declineText ?? "Close"}
-        </button>
-        <button
-          onClick={() => {
-            setResult(true);
-            setShow(false);
-          }}
-        >
-          {props.confirmText ?? "Confirm"}
-        </button>
+      <div className="pre-build">
+        <QuestionMarkIcon />
+        <h2>{props.title}</h2>
+        <p>{props.message}</p>
+        <div className="btn-container">
+          <button
+            onClick={() => {
+              setResult(false);
+              setShow(false);
+            }}
+          >
+            {props.declineText ?? "Close"}
+          </button>
+          <button
+            onClick={() => {
+              setResult(true);
+              setShow(false);
+            }}
+          >
+            {props.confirmText ?? "Confirm"}
+          </button>
+        </div>
       </div>
     </CustomPopup>
   );

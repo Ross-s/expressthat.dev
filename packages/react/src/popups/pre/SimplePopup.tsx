@@ -15,15 +15,17 @@ export function SimplePopup(props: {
 
   return (
     <CustomPopup show={show} onClose={props.onClose}>
-      {props.type === "error" && <ErrorIcon />}
-      {props.type === "warning" && <WarningIcon />}
-      {props.type === "success" && <SuccessIcon />}
-      <h2>{props.title}</h2>
-      <p>{props.message}</p>
-      <div className="btn-container">
-        <button onClick={() => setShow(false)}>
-          {props.confirmText ?? "Ok"}
-        </button>
+      <div className="pre-build">
+        {props.type === "error" && <ErrorIcon />}
+        {props.type === "warning" && <WarningIcon />}
+        {props.type === "success" && <SuccessIcon />}
+        <h2>{props.title}</h2>
+        <p>{props.message}</p>
+        <div className="btn-container">
+          <button onClick={() => setShow(false)}>
+            {props.confirmText ?? "Ok"}
+          </button>
+        </div>
       </div>
     </CustomPopup>
   );

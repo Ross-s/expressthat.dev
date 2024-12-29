@@ -11,7 +11,7 @@ export function WarningIcon() {
       <circle
         fill="none"
         stroke="#ebb01c"
-        strokeWidth="6"
+        strokeWidth="3"
         strokeMiterlimit="10"
         className="path circle"
         cx="43"

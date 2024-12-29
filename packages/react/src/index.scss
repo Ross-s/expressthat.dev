@@ -49,23 +49,55 @@
       animation: expressthat-popup-hide 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)
         forwards;
     }
+    .pre-build {
+      h2,
+      p {
+        margin: 0;
+        color: inherit;
+        cursor: initial;
+        word-wrap: break-word;
+        text-align: center;
+      }
 
-    h2,
-    p {
-      margin: 0;
-      color: inherit;
-      cursor: initial;
-      word-wrap: break-word;
-      text-align: center;
-    }
+      h2 {
+        position: relative;
+        max-width: 100%;
+        padding: 0.8em 1em 0;
+        font-size: 1.875em;
+        font-weight: 600;
+        text-transform: none;
+      }
 
-    h2 {
-      position: relative;
-      max-width: 100%;
-      padding: 0.8em 1em 0;
-      font-size: 1.875em;
-      font-weight: 600;
-      text-transform: none;
+      p {
+        justify-content: center;
+        margin: 0;
+        padding: 1em 1.6em 0.3em;
+        overflow: auto;
+        font-size: 1.125em;
+        font-weight: normal;
+        line-height: normal;
+        word-break: break-word;
+      }
+
+      .btn-container {
+        margin: 0 auto;
+        margin-top: 20px;
+        width: fit-content;
+        button {
+          border: 0;
+          border-radius: 0.25em;
+          background: initial;
+          background-color: #7066e0;
+          color: #fff;
+          font-size: 1em;
+          margin: 0.3125em;
+          padding: 0.625em 1.1em;
+          transition: box-shadow 0.1s;
+          box-shadow: 0 0 0 3px rgba(0, 0, 0, 0);
+          font-weight: 500;
+          cursor: pointer;
+        }
+      }
     }
 
     .close {
@@ -80,36 +112,6 @@
 
       &:hover {
         transform: scale(1.1);
-      }
-    }
-
-    p {
-      justify-content: center;
-      margin: 0;
-      padding: 1em 1.6em 0.3em;
-      overflow: auto;
-      font-size: 1.125em;
-      font-weight: normal;
-      line-height: normal;
-      word-break: break-word;
-    }
-
-    .btn-container {
-      margin: 0 auto;
-      margin-top: 20px;
-      button {
-        border: 0;
-        border-radius: 0.25em;
-        background: initial;
-        background-color: #7066e0;
-        color: #fff;
-        font-size: 1em;
-        margin: 0.3125em;
-        padding: 0.625em 1.1em;
-        transition: box-shadow 0.1s;
-        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0);
-        font-weight: 500;
-        cursor: pointer;
       }
     }
 
