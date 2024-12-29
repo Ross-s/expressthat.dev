@@ -14,8 +14,8 @@ RUN pnpm i -g turbo@^2
 COPY . .
  
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
-# Assuming "svelte" is the name entered in the project's package.json: { name: "svelte" }
-RUN turbo prune svelte --docker
+# Assuming "vue" is the name entered in the project's package.json: { name: "vue" }
+RUN turbo prune vue --docker
  
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -36,16 +36,20 @@ WORKDIR /app
  
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 svelte
-USER svelte
+RUN adduser --system --uid 1001 vue
+USER vue
  
 # Automatically leverage output traces to reduce image size
-# https://nextjs.org/svelte/advanced-features/output-file-tracing
-COPY --from=installer --chown=svelte:nodejs /app/apps/svelte/ ./
+# https://nextjs.org/vue/advanced-features/output-file-tracing
+COPY --from=installer --chown=vue:nodejs /app/apps/vue/ ./
  
 EXPOSE 3000
+
+# Set NuxtJS system variables so the application can be reached on your network
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
 
 
 # The NuxtJS start-up command when the container is launched to serve the built application
 #CMD ["sleep", "infinity"]
-CMD [ "node", "build" ]
+CMD [ "node", ".output/server/index.mjs" ]
