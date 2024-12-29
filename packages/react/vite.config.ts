@@ -36,7 +36,21 @@ export default defineConfig({
     },
     minify: "terser",
     rollupOptions: {
-      
+      external: [
+        "react",
+        "react/compiler-runtime",
+        "react-dom",
+        "react-dom-client",
+        "react-dom/client",
+        "react/jsx-runtime"
+      ],
+      output: {
+        //preserveModules: true,
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
     },
   },
 });
