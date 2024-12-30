@@ -3,7 +3,7 @@ resource "docker_container" "admin" {
     name = "admin"
     ports {
         internal = 3000
-        external = 3000
+        external = 3002
     }
     restart = "always"
 }
