@@ -4,12 +4,11 @@ import { SimplePopup } from "../popups/pre/SimplePopup";
 import { QuestionPopup } from "../popups/pre/QuestionPopup";
 import { ensureRoot } from "../util/ensureRoot";
 
-
 async function simplePopup(
   title: string,
   message: string,
   confirmText: string,
-  type: "success" | "error" | "warning"
+  type: "success" | "error" | "warning",
 ) {
   const el = ensureRoot();
   const root = createRoot(el[0]);
@@ -27,20 +26,32 @@ async function simplePopup(
             resolve();
           }}
         />
-      </StrictMode>
+      </StrictMode>,
     );
   });
-};
+}
 
-export async function SuccessPopup(title: string, message: string, confirmText?: string) {
+export async function SuccessPopup(
+  title: string,
+  message: string,
+  confirmText?: string,
+) {
   return await simplePopup(title, message, confirmText ?? "Ok", "success");
 }
 
-export async function ErrorPopup(title: string, message: string, confirmText?: string) {
+export async function ErrorPopup(
+  title: string,
+  message: string,
+  confirmText?: string,
+) {
   return await simplePopup(title, message, confirmText ?? "Ok", "error");
 }
 
-export async function WarningPopup(title: string, message: string, confirmText?: string) {
+export async function WarningPopup(
+  title: string,
+  message: string,
+  confirmText?: string,
+) {
   return await simplePopup(title, message, confirmText ?? "Ok", "warning");
 }
 
@@ -48,7 +59,7 @@ export async function ConfirmPopup(
   title: string,
   message: string,
   confirmText?: string,
-  declineText?: string
+  declineText?: string,
 ) {
   const el = ensureRoot();
   const root = createRoot(el[0]);
@@ -66,8 +77,7 @@ export async function ConfirmPopup(
             resolve(value);
           }}
         />
-      </StrictMode>
+      </StrictMode>,
     );
   });
 }
-

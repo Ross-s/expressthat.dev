@@ -27,14 +27,12 @@ const ThemeImage = (props: Props) => {
 };
 
 export default function Home() {
-
-
   return (
     <div className={styles.page}>
       <button
         onClick={async () => {
           console.log(
-            `result: ${await ConfirmPopup("Are you sure?", "You clicked the button!", "Yes", "No")}`
+            `result: ${await ConfirmPopup("Are you sure?", "You clicked the button!", "Yes", "No")}`,
           );
           await SuccessPopup("Good job!", "You clicked the button!", "woooo");
           await ErrorPopup("Bad job!", "You clicked the button!", "woooo");

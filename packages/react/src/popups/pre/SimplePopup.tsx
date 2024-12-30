@@ -4,7 +4,6 @@ import { ErrorIcon } from "./icons/ErrorIcon";
 import { SuccessIcon } from "./icons/SuccessIcon";
 import { WarningIcon } from "./icons/WarningIcon";
 
-
 export function SimplePopup(props: {
   title?: string;
   message?: string;

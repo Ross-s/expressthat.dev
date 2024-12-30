@@ -1,5 +1,4 @@
-import {v4 as uuid} from 'uuid';
-
+import { v4 as uuid } from "uuid";
 
 export function ensureRoot(): [HTMLElement, () => void] {
   const root = document.createElement("div");
