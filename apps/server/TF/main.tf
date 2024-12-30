@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "/home/jenkins/tf-backend/apps/Express That Apps/terraform.tfstate"
+    path = "/home/jenkins/tf-backend/apps/server/terraform.tfstate"
   }
   required_providers {
     docker = {
