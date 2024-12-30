@@ -43,8 +43,8 @@ USER nextjs
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/.next/static ./apps/server/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/public ./apps/server/public
+COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/.next/static ./apps/server/admin/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/public ./apps/server/admin/public
  
 EXPOSE 3000
 
