@@ -1,8 +1,9 @@
 import { createRoot } from "react-dom/client";
-import { lazy, StrictMode } from "react";
+import { StrictMode } from "react";
+import { SimplePopup } from "../popups/pre/SimplePopup";
+import { QuestionPopup } from "../popups/pre/QuestionPopup";
+import { ensureRoot } from "../util/ensureRoot";
 
-const QuestionPopup = lazy(() => import("../popups/pre/QuestionPopup"));
-const SimplePopup = lazy(() => import("../popups/pre/SimplePopup"));
 
 async function simplePopup(
   title: string,
@@ -10,7 +11,6 @@ async function simplePopup(
   confirmText: string,
   type: "success" | "error" | "warning"
 ) {
-  const ensureRoot = await import("../util/ensureRoot").then((m) => m.ensureRoot);
   const el = ensureRoot();
   const root = createRoot(el[0]);
   return new Promise<void>((resolve) => {
@@ -50,7 +50,6 @@ export async function ConfirmPopup(
   confirmText?: string,
   declineText?: string
 ) {
-  const ensureRoot = await import("../util/ensureRoot").then((m) => m.ensureRoot);
   const el = ensureRoot();
   const root = createRoot(el[0]);
   return new Promise<boolean>((resolve) => {

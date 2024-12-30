@@ -1,9 +1,8 @@
-import { lazy, useState } from "react";
+import { useState } from "react";
+import { CustomPopup } from "../CustomPopup";
+import { QuestionMarkIcon } from "./icons/QuestionMarkIcon";
 
-const QuestionMarkIcon = lazy(() => import("./icons/QuestionMarkIcon"));
-const CustomPopup = lazy(() => import("../CustomPopup"));
-
-export default function QuestionPopup(props: {
+export function QuestionPopup(props: {
   title?: string;
   message?: string;
   confirmText?: string;

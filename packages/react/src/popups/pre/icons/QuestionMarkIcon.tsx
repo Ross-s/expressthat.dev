@@ -1,4 +1,4 @@
-export default function QuestionMarkIcon() {
+export function QuestionMarkIcon() {
   return (
     <svg
       viewBox="0 0 48 48"

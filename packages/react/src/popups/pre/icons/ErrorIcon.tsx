@@ -1,4 +1,4 @@
-export default function ErrorIcon() {
+export function ErrorIcon() {
   return (
     <svg
       version="1.1"
