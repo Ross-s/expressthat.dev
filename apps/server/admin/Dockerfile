@@ -15,7 +15,7 @@ COPY . .
  
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
 # Assuming "docs" is the name entered in the project's package.json: { name: "docs" }
-RUN turbo prune docs --docker
+RUN turbo prune admin --docker
  
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -42,10 +42,10 @@ USER nextjs
  
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/docs/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/docs/.next/static ./apps/docs/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/docs/public ./apps/docs/public
+COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/.next/static ./apps/docs/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/public ./apps/docs/public
  
 EXPOSE 3000
 
-CMD node apps/docs/server.js
+CMD node apps/server/admin/server.js
