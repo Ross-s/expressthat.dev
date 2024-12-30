@@ -41,7 +41,7 @@ USER vue
  
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/vue/advanced-features/output-file-tracing
-COPY --from=installer --chown=vue:nodejs /app/apps/vue/ ./
+COPY --from=installer --chown=vue:nodejs /app/apps/docs/vue/ ./
  
 EXPOSE 3000
 

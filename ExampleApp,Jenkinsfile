@@ -11,7 +11,7 @@ pipeline {
             script {
               withCredentials([string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY')]) {
                 docker.withRegistry("${DOCKER_REGISTRY}", 'nexus-credentials') {
-                  def dockerImage = docker.build("docs:${env.BUILD_ID}", '--progress=plain -f apps/docs/Dockerfile .')
+                  def dockerImage = docker.build("docs:${env.BUILD_ID}", '--progress=plain -f apps/docs/docs/Dockerfile .')
                   dockerImage.push()
                 }
               }
@@ -21,7 +21,7 @@ pipeline {
             script {
               withCredentials([string(credentialsId: 'nexus-url', variable: 'DOCKER_REGISTRY')]) {
                 docker.withRegistry("${DOCKER_REGISTRY}", 'nexus-credentials') {
-                  def dockerImage = docker.build("example-vue:${env.BUILD_ID}", '--progress=plain -f apps/vue/Dockerfile .')
+                  def dockerImage = docker.build("example-vue:${env.BUILD_ID}", '--progress=plain -f apps/docs/vue/Dockerfile .')
                   dockerImage.push()
                 }
               }
@@ -34,7 +34,7 @@ pipeline {
     stage('Terraform Init') {
       steps {
         script {
-            sh "terraform -chdir=apps/TF init"
+            sh "terraform -chdir=apps/docs/TF init"
         }
       }
     }
@@ -50,7 +50,7 @@ pipeline {
             ]
           ) {
                 sh """
-                  terraform -chdir=apps/TF apply \
+                  terraform -chdir=apps/docs/TF apply \
                   -var='build_id=${env.BUILD_ID}' \
                   -var='docker_registry=${DOCKER_REGISTRY}' \
                   -var='docker_registry_username=${DOCKER_REGISTRY_USERNAME}' \
