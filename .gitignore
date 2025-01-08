@@ -40,3 +40,5 @@ yarn-error.log*
 packages/generator/.svelte-kit/
 
 packages/generator/packages/
+
+apps/server/admin-old/

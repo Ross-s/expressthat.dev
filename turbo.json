@@ -3,7 +3,7 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "env": ["BUILD_MODE", "BASE_PATH"],
+      "env": ["BUILD_MODE", "BASE_PATH", "COGNITO_ISSUER", "COGNITO_CLIENT_ID", "COGNITO_CLIENT_SECRET"],
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", ".nuxt/**", ".output/**", "dist/**", ".svelte-kit/**", "build/**"]
