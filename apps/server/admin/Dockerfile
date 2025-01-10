@@ -1,4 +1,4 @@
-FROM node:20-alpine AS base
+FROM node:18-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
@@ -29,18 +29,23 @@ RUN pnpm install
  
 # Build the project
 COPY --from=builder /app/out/full/ .
+ENV BUILD_MODE="standalone"
 RUN pnpm turbo run build
  
 FROM base AS runner
 WORKDIR /app
-
+ 
+# Don't run production as root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+USER nextjs
  
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/. ./
-RUN rm -rf node_modules
-RUN ls
-RUN npm install
+COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/.next/static ./apps/server/admin/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/server/admin/public ./apps/server/admin/public
+ 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD node apps/server/admin/server.js
