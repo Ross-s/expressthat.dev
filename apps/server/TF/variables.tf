@@ -35,3 +35,23 @@ variable "internal_host" {
   description = "Internal host"
   default = "172.17.0.1"
 }
+
+variable "server_cognito_client_id" {
+  description = "Cognito client ID"
+}
+
+variable "server_cognito_client_secret" {
+  description = "Cognito client secret"
+}
+
+variable "server_cognito_issuer" {
+  description = "Cognito issuer"
+}
+
+variable "server_auth_secret" {
+  description = "Auth secret"
+}
+
+variable "database_url" {
+  description = "Database URL"
+}
