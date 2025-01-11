@@ -17,3 +17,13 @@ resource "docker_container" "admin" {
     
     restart = "always"
 }
+
+resource "docker_container" "keydb" {
+    image = docker_image.keydb.image_id
+    name = "keydb"
+    ports {
+        internal = 6379
+        external = 6379
+    }
+    restart = "always"
+}

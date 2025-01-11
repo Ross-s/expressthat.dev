@@ -1,6 +1,7 @@
 import { signOut } from "../../server/auth";
 import Image from "next/image";
 import { ActionButton } from "../../components/client/ActionButton";
+import Link from "next/link";
 
 export default function Layout({
   children,
@@ -17,17 +18,11 @@ export default function Layout({
   return (
     <>
       <div className="navbar bg-base-100 shadow-sm">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">ExpressThat</a>
-          <select
-            defaultValue="Pick a workspace"
-            className="select select-secondary w-50"
-          >
-            <option disabled>Default</option>
-            <option>Zig</option>
-            <option>Go</option>
-            <option>Rust</option>
-          </select>
+        <div className="flex-1 flex">
+            <div className="flex items-center">
+            <Link href={"/app"} className="btn btn-ghost text-xl">ExpressThat</Link>
+            <h1 className="ml-4">Websites</h1>
+            </div>
         </div>
 
         <div className="flex-none">
