@@ -5,12 +5,13 @@ resource "docker_container" "admin" {
         internal = 3000
         external = 3002
     }
-    env = {
-        COGNITO_CLIENT_ID=var.server_cognito_client_id
-        COGNITO_CLIENT_SECRET=var.server_cognito_client_secret
-        COGNITO_ISSUER=var.server_cognito_issuer
-        AUTH_SECRET=var.server_auth_secret
-        DATABASE_URL=var.server_database_url
-    }
+    env = [
+        "COGNITO_CLIENT_ID=${var.server_cognito_client_id}",
+        "COGNITO_CLIENT_SECRET=${var.server_cognito_client_secret}",
+        "COGNITO_ISSUER=${var.server_cognito_issuer}",
+        "AUTH_SECRET=${var.server_auth_secret}",
+        "DATABASE_URL=${var.server_database_url}"
+        ]
+    
     restart = "always"
 }
