@@ -10,7 +10,7 @@ resource "docker_container" "admin" {
         COGNITO_CLIENT_SECRET=var.server_cognito_client_secret
         COGNITO_ISSUER=var.server_cognito_issuer
         AUTH_SECRET=var.server_auth_secret
-        DATABASE_URL=var.database_url
+        DATABASE_URL=var.server_database_url
     }
     restart = "always"
 }
