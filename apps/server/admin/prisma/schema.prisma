@@ -15,3 +15,10 @@ model User {
 
   @@index([providerId, email])
 }
+
+
+model Website {
+  id       String       @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  createdAt DateTime     @default(now())
+}
