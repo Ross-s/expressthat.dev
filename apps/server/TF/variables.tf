@@ -52,6 +52,6 @@ variable "server_auth_secret" {
   description = "Auth secret"
 }
 
-variable "database_url" {
+variable "server_database_url" {
   description = "Database URL"
 }
