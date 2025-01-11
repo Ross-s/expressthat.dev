@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ActionButton } from "../components/client/ActionButton";
 import { auth, signIn, signOut } from "../server/auth";
+import { redirect } from "next/navigation";
 
 
 async function signout() {
   "use server";
-  return await signOut();
+  return redirect(`https://auth.expressthat.dev/logout?client_id=${process.env.COGNITO_CLIENT_ID}&logout_uri=${process.env.AUTH_URL}/logout`);
 }
 
 async function signin() {
