@@ -12,7 +12,7 @@ resource "docker_container" "admin" {
         "AUTH_SECRET=${var.server_auth_secret}",
         "DATABASE_URL=${var.server_database_url}",
         "AUTH_TRUST_HOST=true",
-        "AUTH_URL=https://app.expressthat.dev/api/auth".
+        "AUTH_URL=https://app.expressthat.dev/api/auth",
         "REDIS_IP=${var.server_redis_ip}"
         ]
     
