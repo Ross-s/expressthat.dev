@@ -55,3 +55,7 @@ variable "server_auth_secret" {
 variable "server_database_url" {
   description = "Database URL"
 }
+
+variable "server_redis_ip" {
+  description = "Redis IP"
+}

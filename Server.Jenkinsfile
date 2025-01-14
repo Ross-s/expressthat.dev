@@ -41,6 +41,7 @@ pipeline {
             string(credentialsId: 'expressthat-auth-secret', variable: 'AUTH_SECRET'),
             string(credentialsId: 'expressthat-cognito-issuer', variable: 'COGNITO_ISSUER'),
             string(credentialsId: 'expressthat-database-url', variable: 'DATABASE_URL'),
+            string(credentialsId: 'expressthat-redis-ip', variable: 'REDIS_IP'),
             ]
           ) {
                 sh """
@@ -57,6 +58,7 @@ pipeline {
                   -var='server_auth_secret=${AUTH_SECRET}' \
                   -var='server_cognito_issuer=${COGNITO_ISSUER}' \
                   -var='server_database_url=${DATABASE_URL}' \
+                  -var='server_redis_ip=${REDIS_IP}' \
                   -auto-approve
                 """
           }
