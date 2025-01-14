@@ -9,6 +9,7 @@ export const WebsiteRepository = {
     const inserted = await prisma.website.create({
       data: {
         name: website.name,
+        url: website.url,
       },
     });
 
