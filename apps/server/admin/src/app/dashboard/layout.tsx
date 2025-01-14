@@ -1,28 +1,36 @@
-import { signOut } from "../../server/auth";
+import { auth, signIn, signOut } from "@/server/auth";
 import Image from "next/image";
-import { ActionButton } from "../../components/client/ActionButton";
+import { ActionButton } from "@/components/client/ActionButton";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
-export default function Layout({
+export const metadata: Metadata = {
+  title: "Websites | ExpressThat",
+};
+
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   async function signout() {
     "use server";
-    return await signOut({
-      redirectTo: "/",
-    });
+    return redirect(
+      `https://auth.expressthat.dev/logout?client_id=${process.env.COGNITO_CLIENT_ID}&logout_uri=${process.env.AUTH_URL}/logout`
+    );
   }
 
   return (
     <>
       <div className="navbar bg-base-100 shadow-sm">
         <div className="flex-1 flex">
-            <div className="flex items-center">
-            <Link href={"/app"} className="btn btn-ghost text-xl">ExpressThat</Link>
+          <div className="flex items-center">
+            <Link href={"/"} className="btn btn-ghost text-xl">
+              ExpressThat
+            </Link>
             <h1 className="ml-4">Websites</h1>
-            </div>
+          </div>
         </div>
 
         <div className="flex-none">

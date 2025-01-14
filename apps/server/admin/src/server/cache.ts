@@ -8,6 +8,7 @@ export const cache = globalForCache.cache || createStorage({
       base: "unstorage",
       host: process.env.REDIS_IP,
       port: 6379,
+      ttl: 60 * 60, // 1 hour
     }),
   })
  

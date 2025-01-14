@@ -1,6 +1,7 @@
 import { prisma } from "./prisma";
 import NextAuth, { DefaultSession } from "next-auth";
 import cognito from "next-auth/providers/cognito";
+import { UserRepository } from "./repositorys/UserRepository";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -24,7 +25,7 @@ declare module "next-auth" {
   // }
 }
 
-export const { handlers, signIn,  signOut, auth } = NextAuth({
+export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     cognito({
       clientId: process.env.COGNITO_CLIENT_ID,
@@ -44,32 +45,18 @@ export const { handlers, signIn,  signOut, auth } = NextAuth({
         email: token.email,
       },
     }),
-
-    authorized: async ({auth, request}) => {
-        if (!auth && request.nextUrl.pathname == "/app")
-        {
-            return false;
-        }
-        return true;
-    },
-
     jwt: async (prams) => {
       if (prams.profile) {
         prams.token.email = prams.profile.email as string;
 
-        const result = await prisma.user.findFirst({
-          where: { providerId: prams.profile.sub as string },
-        });
+        const result = await UserRepository.findByProviderId(prams.profile.sub as string);
 
         if (result) {
           prams.token.sub = result.id;
         } else {
-          const user = await prisma.user.create({
-            data: {
-              providerId: prams.profile.sub as string,
-              email: prams.profile.email as string,
-              createdAt: new Date(),
-            },
+          const user = await UserRepository.create({
+            providerId: prams.profile.sub as string,
+            email: prams.profile.email as string
           });
 
           prams.token.sub = user.id;

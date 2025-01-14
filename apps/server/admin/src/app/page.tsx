@@ -28,7 +28,7 @@ export default async function Home() {
        {session && <ActionButton action={signout}><button>Sign Out</button></ActionButton>}
        {!session && <ActionButton action={signin}><button>Sign In</button></ActionButton>}
        <br />
-       {session && <Link href="/app">App</Link>}
+       {session && <Link href="/dashboard">Dashboard</Link>}
       </main>
     </div>
   );

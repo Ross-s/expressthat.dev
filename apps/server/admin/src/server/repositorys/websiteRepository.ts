@@ -13,6 +13,8 @@ export const WebsiteRepository = {
     });
 
     await cache.set(`${WEBSITE_CACHE_PREFIX}:${inserted.id}`, inserted, {});
+
+    return inserted;
   },
 
   async findById(id: string) {
