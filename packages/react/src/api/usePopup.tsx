@@ -1,7 +1,7 @@
-import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
-import { SimplePopup } from "../popups/pre/SimplePopup";
+import { createRoot } from "react-dom/client";
 import { QuestionPopup } from "../popups/pre/QuestionPopup";
+import { SimplePopup } from "../popups/pre/SimplePopup";
 import { ensureRoot } from "../util/ensureRoot";
 
 async function simplePopup(

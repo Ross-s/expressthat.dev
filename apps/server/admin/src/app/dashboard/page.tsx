@@ -8,24 +8,25 @@ import { revalidatePath } from "next/cache";
 import { OnboardStage } from "../actions/user/onBoardingState";
 
 export default async function App() {
-  const session = await auth()
+  const session = await auth();
 
   if (!session) {
-    redirect("/api/auth/login")
+    redirect("/api/auth/login");
   }
 
   const user = await UserRepository.findById(session.user.id);
-
 
   async function refreshData() {
     "use server";
     revalidatePath("/dashboard");
   }
 
-
   return (
     <SessionProvider>
-      <Dashboard onboardingState={user?.onboardingState as OnboardStage} refreshData={refreshData} />
+      <Dashboard
+        onboardingState={user?.onboardingState as OnboardStage}
+        refreshData={refreshData}
+      />
     </SessionProvider>
   );
 }

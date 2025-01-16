@@ -1,9 +1,9 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import dts from "vite-plugin-dts";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import banner from "vite-plugin-banner";
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig({

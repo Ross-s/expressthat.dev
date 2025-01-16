@@ -1,5 +1,5 @@
-import { User, type Prisma } from "@prisma/client";
-import { prisma } from "../prisma";
+import { User, type Prisma } from "@expressthat/db";
+import { prisma } from "@expressthat/db";
 import { CACHE_PREFIX } from "../constants";
 import { cache } from "../cache";
 
@@ -19,14 +19,13 @@ export const UserRepository = {
     return inserted;
   },
 
-
   async findById(id: string) {
     const result = await cache.get<User>(`${USER_CACHE_PREFIX}:${id}`);
 
     if (result) {
       return result;
     }
-    
+
     const user = await prisma.user.findFirst({
       where: {
         id,
@@ -48,15 +47,15 @@ export const UserRepository = {
         providerId,
       },
       select: {
-        id: true
-      }
+        id: true,
+      },
     });
 
     if (!user) {
       return null;
     }
 
-    if (!await cache.has(`${USER_CACHE_PREFIX}:${user.id}`)) {
+    if (!(await cache.has(`${USER_CACHE_PREFIX}:${user.id}`))) {
       await cache.set(`${USER_CACHE_PREFIX}:${user.id}`, user);
     }
     return user;

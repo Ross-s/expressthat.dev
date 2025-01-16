@@ -17,7 +17,7 @@ export default async function Layout({
   async function signout() {
     "use server";
     return redirect(
-      `https://auth.expressthat.dev/logout?client_id=${process.env.COGNITO_CLIENT_ID}&logout_uri=${process.env.AUTH_URL}/logout`
+      `https://auth.expressthat.dev/logout?client_id=${process.env.COGNITO_CLIENT_ID}&logout_uri=${process.env.AUTH_URL}/logout`,
     );
   }
 

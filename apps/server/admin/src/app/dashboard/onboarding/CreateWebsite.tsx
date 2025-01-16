@@ -5,11 +5,8 @@ export function CreateWebsite(props: {
   nextStage: () => void;
   previousStage: () => void;
 }) {
-    const [name, setName] = useState("");
-    const [url, setUrl] = useState("");
-
-    
-
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-base-100 bg-opacity-75">

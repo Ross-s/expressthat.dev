@@ -1,4 +1,3 @@
-import { prisma } from "./prisma";
 import NextAuth, { DefaultSession } from "next-auth";
 import cognito from "next-auth/providers/cognito";
 import { UserRepository } from "./repositorys/UserRepository";
@@ -49,14 +48,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (prams.profile) {
         prams.token.email = prams.profile.email as string;
 
-        const result = await UserRepository.findByProviderId(prams.profile.sub as string);
+        const result = await UserRepository.findByProviderId(
+          prams.profile.sub as string,
+        );
 
         if (result) {
           prams.token.sub = result.id;
         } else {
           const user = await UserRepository.create({
             providerId: prams.profile.sub as string,
-            email: prams.profile.email as string
+            email: prams.profile.email as string,
           });
 
           prams.token.sub = user.id;

@@ -5,66 +5,78 @@ import { UserRepository } from "@/server/repositorys/UserRepository";
 import { OnboardStage } from "./onBoardingState";
 
 export async function updateOnboardState(state: OnboardStage): Promise<void> {
-    const session = await auth();
+  const session = await auth();
 
-    if (!session) {
-        return;
-    }
+  if (!session) {
+    return;
+  }
 
-    await UserRepository.update(session.user.id, {
-        onboardingState: state,
-    });
+  await UserRepository.update(session.user.id, {
+    onboardingState: state,
+  });
 }
 
-export async function getFirstAndLastName(): Promise<{ firstName?: string; lastName?: string; }> {
-    const session = await auth();
+export async function getFirstAndLastName(): Promise<{
+  firstName?: string;
+  lastName?: string;
+}> {
+  const session = await auth();
 
-    if (!session) {
-        return {};
-    }
+  if (!session) {
+    return {};
+  }
 
-    const user = await UserRepository.findById(session.user.id);
+  const user = await UserRepository.findById(session.user.id);
 
-    if (!user) {
-        return {};
-    }
+  if (!user) {
+    return {};
+  }
 
-    return {
-        firstName: user.firstName ?? undefined,
-        lastName: user.lastName ?? undefined,
-    };
+  return {
+    firstName: user.firstName ?? undefined,
+    lastName: user.lastName ?? undefined,
+  };
 }
 
-export async function updateName(firstName: string, lastName: string): Promise<[boolean, { firstName?: string; lastName?: string; }]> {
-    const errors: {
-        firstName?: string;
-        lastName?: string;
-    } = {};
+export async function updateName(
+  firstName: string,
+  lastName: string,
+): Promise<[boolean, { firstName?: string; lastName?: string }]> {
+  const errors: {
+    firstName?: string;
+    lastName?: string;
+  } = {};
 
-    const session = await auth();
+  const session = await auth();
 
-    if (!firstName || typeof firstName !== 'string' || !/^[a-zA-Z]+$/.test(firstName)) {
-        errors.firstName = "Invalid first name";
-    }
+  if (
+    !firstName ||
+    typeof firstName !== "string" ||
+    !/^[a-zA-Z]+$/.test(firstName)
+  ) {
+    errors.firstName = "Invalid first name";
+  }
 
-    if (!lastName || typeof lastName !== 'string' || !/^[a-zA-Z]+$/.test(lastName)) {
-        errors.lastName = "Invalid last name";
-    }
+  if (
+    !lastName ||
+    typeof lastName !== "string" ||
+    !/^[a-zA-Z]+$/.test(lastName)
+  ) {
+    errors.lastName = "Invalid last name";
+  }
 
-    if (errors.firstName || errors.lastName) {
-        return [false, errors];
-    }
-    
-    if (!session) {
-        return [false, {}];
-    }
+  if (errors.firstName || errors.lastName) {
+    return [false, errors];
+  }
 
-    await UserRepository.update(session.user.id, {
-        firstName,
-        lastName,
-    });
+  if (!session) {
+    return [false, {}];
+  }
 
-    return [true, {}];
+  await UserRepository.update(session.user.id, {
+    firstName,
+    lastName,
+  });
+
+  return [true, {}];
 }
-
-

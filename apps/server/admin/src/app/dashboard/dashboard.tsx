@@ -9,5 +9,11 @@ export function Dashboard(props: {
 }) {
   const { data: session } = useSession();
 
-  return <>{props.onboardingState != OnboardStage.Complete && <Onboard onboardingState={props.onboardingState} />}</>;
+  return (
+    <>
+      {props.onboardingState != OnboardStage.Complete && (
+        <Onboard onboardingState={props.onboardingState} />
+      )}
+    </>
+  );
 }

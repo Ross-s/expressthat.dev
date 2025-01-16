@@ -1,17 +1,17 @@
 {
-  "name": "vue",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "node -e \"setTimeout(()=>{},20000)\"&& SET NITRO_PORT=3001&& nuxt dev",
-    "generate": "nuxt generate",
-    "start": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "dependencies": {
-    "nuxt": "^3.14.1592",
-    "vue": "^3.5.13",
-    "vue-router": "latest"
-  }
+	"name": "vue",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "node -e \"setTimeout(()=>{},20000)\"&& SET NITRO_PORT=3001&& nuxt dev",
+		"generate": "nuxt generate",
+		"start": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"dependencies": {
+		"nuxt": "^3.14.1592",
+		"vue": "^3.5.13",
+		"vue-router": "latest"
+	}
 }

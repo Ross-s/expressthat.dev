@@ -1,0 +1,17 @@
+{
+	"name": "@expressthat/db",
+	"version": "0.0.0",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"devDependencies": {
+		"@types/node": "^22.10.6",
+		"prisma": "^6.1.0"
+	},
+	"scripts": {
+		"db:generate": "prisma generate"
+	},
+	"dependencies": {
+		"@prisma/client": "^6.1.0"
+	}
+}

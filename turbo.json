@@ -1,22 +1,40 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
-  "tasks": {
-    "build": {
-      "env": ["BUILD_MODE", "BASE_PATH", "COGNITO_ISSUER", "COGNITO_CLIENT_ID", "COGNITO_CLIENT_SECRET"],
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", ".nuxt/**", ".output/**", "dist/**", ".svelte-kit/**", "build/**"]
-    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "check-types": {
-      "dependsOn": ["^check-types"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    }
-  }
+	"$schema": "https://turbo.build/schema.json",
+	"ui": "tui",
+	"tasks": {
+		"build": {
+			"env": [
+				"BUILD_MODE",
+				"BASE_PATH",
+				"COGNITO_ISSUER",
+				"COGNITO_CLIENT_ID",
+				"COGNITO_CLIENT_SECRET"
+			],
+			"dependsOn": ["^build", "^db:generate"],
+			"inputs": ["$TURBO_DEFAULT$", ".env*"],
+			"outputs": [
+				".next/**",
+				"!.next/cache/**",
+				".nuxt/**",
+				".output/**",
+				"dist/**",
+				".svelte-kit/**",
+				"build/**"
+			]
+		},
+		"lint": {
+			"dependsOn": ["^lint"]
+		},
+		"check-types": {
+			"dependsOn": ["^check-types"]
+		},
+		"dev": {
+			"dependsOn": ["^db:generate"],
+			"cache": false,
+			"persistent": true
+		},
+		"db:generate": {
+			"cache": false
+		}
+	}
 }

@@ -1,5 +1,5 @@
-import { Website, type Prisma } from "@prisma/client";
-import { prisma } from "../prisma";
+import { Website, type Prisma } from "@expressthat/db";
+import { prisma } from "@expressthat/db";
 import { cache } from "../cache";
 import { CACHE_PREFIX } from "../constants";
 const WEBSITE_CACHE_PREFIX = `${CACHE_PREFIX}:Websites`;

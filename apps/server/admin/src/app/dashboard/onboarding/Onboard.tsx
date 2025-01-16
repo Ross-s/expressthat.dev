@@ -2,20 +2,23 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { getFirstAndLastName, updateOnboardState } from "@/app/actions/user/profile";
+import {
+  getFirstAndLastName,
+  updateOnboardState,
+} from "@/app/actions/user/profile";
 import { OnboardStage } from "@/app/actions/user/onBoardingState";
 
 const AboutYou = dynamic(() =>
-  import("./AboutYou").then((mod) => mod.AboutYou)
+  import("./AboutYou").then((mod) => mod.AboutYou),
 );
 const Welcome = dynamic(() => import("./Welcome").then((mod) => mod.Welcome));
 const CreateWebsite = dynamic(() =>
-  import("./CreateWebsite").then((mod) => mod.CreateWebsite)
+  import("./CreateWebsite").then((mod) => mod.CreateWebsite),
 );
 
 export function Onboard(props: { onboardingState: OnboardStage }) {
   const [onboardStage, setOnboardState] = useState<OnboardStage>(
-    props.onboardingState
+    props.onboardingState,
   );
 
   const [firstName, setFirstName] = useState("");
