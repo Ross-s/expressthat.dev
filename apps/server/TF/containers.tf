@@ -66,6 +66,8 @@ resource "docker_container" "logto" {
     env = [
         "TRUST_PROXY_HEADER=1",
         "DB_URL=postgres://${var.server_postgres_user}:${var.server_postgres_password}@${var.server_redis_ip}:5432/logto",
+        "ENDPOINT=https://auth.${var.domain_name}",
+        "ADMIN_ENDPOINT=https://auth-admin.${var.domain_name}",
     ]
     entrypoint = ["sh", "-c", "npm run cli db seed -- --swe && npm start"]
     restart = "always"
