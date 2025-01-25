@@ -16,6 +16,20 @@ resource "nginxproxymanager_proxy_host" "logto" {
   caching_enabled         = true
   allow_websocket_upgrade = true
   block_exploits          = true
+
+  location {
+    path           = "/"
+    forward_scheme = "http"
+    forward_host   = var.internal_host
+    forward_port   = 9001
+
+    advanced_config = <<EOF
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto https;
+    EOF
+  }
 }
 
 resource "nginxproxymanager_proxy_host" "logto_admin" {
@@ -26,4 +40,18 @@ resource "nginxproxymanager_proxy_host" "logto_admin" {
   caching_enabled         = true
   allow_websocket_upgrade = true
   block_exploits          = true
+
+  location {
+    path           = "/"
+    forward_scheme = "http"
+    forward_host   = var.internal_host
+    forward_port   = 9002
+
+    advanced_config = <<EOF
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto https;
+    EOF
+  }
 }
