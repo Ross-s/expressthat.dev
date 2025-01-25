@@ -44,8 +44,8 @@ resource "docker_container" "postgres" {
         "PGDATA=/var/lib/postgresql/data/pgdata"
     ]
 
-    mounts = [{
+    mounts {
         source = docker_volume.postgres_data.name
         target = "/var/lib/postgresql/data"
-    }]
+    }
 }
