@@ -48,4 +48,25 @@ resource "docker_container" "postgres" {
         volume_name = docker_volume.postgres_data.name
         container_path  = "/var/lib/postgresql/data"
     }
+    restart = "always"
+}
+
+resource "docker_container" "logto" {
+    image = docker_image.logto.image_id
+    name = "logto"
+    ports {
+        internal = 3001
+        external = 9001
+    }
+
+    ports {
+        internal = 3002
+        external = 9002
+    }
+    env = [
+        "TRUST_PROXY_HEADER=1",
+        "DB_URL=postgres://${var.server_postgres_user}:${var.server_postgres_password}@postgres:5432/logto",
+    ]
+    entrypoint = ["sh", "-c", "npm run cli db seed -- --swe && npm start"]
+    restart = "always"
 }
