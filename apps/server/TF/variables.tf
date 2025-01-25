@@ -59,3 +59,11 @@ variable "server_database_url" {
 variable "server_redis_ip" {
   description = "Redis IP"
 }
+
+variable "server_postgres_user" {
+  description = "Postgres user"
+}
+
+variable "server_postgres_password" {
+  description = "Postgres password"
+}

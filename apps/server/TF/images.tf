@@ -5,3 +5,7 @@ resource "docker_image" "admin" {
 resource "docker_image" "keydb" {
     name = "eqalpha/keydb:latest"
 }
+
+resource "docker_image" "postgres" {
+    name = "postgres:17-alpine"
+}
