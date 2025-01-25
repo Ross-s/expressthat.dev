@@ -42,6 +42,7 @@ pipeline {
             string(credentialsId: 'expressthat-cognito-issuer', variable: 'COGNITO_ISSUER'),
             string(credentialsId: 'expressthat-database-url', variable: 'DATABASE_URL'),
             string(credentialsId: 'expressthat-redis-ip', variable: 'REDIS_IP'),
+            usernamePassword(credentialsId: 'server_postgres', usernameVariable: 'POSTGRES_USERNAME', passwordVariable: 'POSTGRES_PASSWORD')
             ]
           ) {
                 sh """
@@ -59,6 +60,8 @@ pipeline {
                   -var='server_cognito_issuer=${COGNITO_ISSUER}' \
                   -var='server_database_url=${DATABASE_URL}' \
                   -var='server_redis_ip=${REDIS_IP}' \
+                  -var='server_postgres_user=${POSTGRES_USERNAME}' \
+                  -var='server_postgres_password=${POSTGRES_PASSWORD}' \
                   -auto-approve
                 """
           }
