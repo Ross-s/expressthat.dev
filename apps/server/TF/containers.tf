@@ -29,6 +29,10 @@ resource "docker_container" "keydb" {
     restart = "always"
 }
 
+resource "docker_volume" "postgres_data" {
+  name = "postgres_data"
+}
+
 resource "docker_container" "postgres" {
     image = docker_image.postgres.image_id
     name = "postgres"
